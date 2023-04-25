@@ -5,6 +5,8 @@ console.log(galleryItems);
 
 const galleryCont = document.querySelector(".gallery");
 
+const markUp = []
+
 galleryItems.forEach(({ preview, original, description }) => {
   const galleryItem = document.createElement("li");
   galleryItem.classList.add("gallery__item");
@@ -19,11 +21,12 @@ galleryItems.forEach(({ preview, original, description }) => {
   image.alt = description;
 
   link.append(image);
-  galleryItem.append(link);
-  galleryCont.append(galleryItem);
+    galleryItem.append(link);
+    markUp.push(galleryItem)
+
 });
 
-
+  galleryCont.append(...markUp);
 const lightbox = new SimpleLightbox(".gallery a", {
   captionsData: "alt",
   captionDelay: 300,

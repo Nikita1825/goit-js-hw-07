@@ -11,10 +11,15 @@ galleryCont.insertAdjacentHTML("beforeend", gallery)
 function createImgGallery() {
     return galleryItems.map(({ preview, original, description }) => {
         return `<li class="gallery__item">
-    <a class="gallery__link" href="${original}" data-original-img=${original}>
-      <img class="gallery__image" src="${preview}" alt="${description}" />
-    </a>
-  </li>
+  <a class="gallery__link" href="${original}">
+    <img
+      class="gallery__image"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
+    />
+  </a>
+</li>
 `;
     }).join(" ")
 }
@@ -22,19 +27,15 @@ function createImgGallery() {
 const instances = [];
 
 galleryCont.addEventListener("click", (e) => {
+   
     e.preventDefault()
-        const original = e.target
-
-          .closest(".gallery__link")
-          .getAttribute("data-original-img");
-    
     const instance = basicLightbox.create(`
-    <img src="${original}" width="800" height="600">
+    <img src="${e.target.dataset.source}" width="800" height="600">
 `);
 
     
 
-     instances.push(instance); // Add instance to array
+     
      instance.show();
      
 })
